@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:21.04
 LABEL maintainer="joshb@mesosphere.com" purpose="Josh's lab ubuntu image"
 WORKDIR /
 ENV TERM xterm
@@ -6,10 +6,11 @@ ENV TERM xterm
 ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64	
 ENTRYPOINT bash 
 
-RUN apt-get update 
+RUN apt-get update
 RUN apt-get -y upgrade
-RUN apt-get install -y \
-apt-utils \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+apt-utils apt-transport-https \
+coreutils \
 curl \
 vim \
 nano \
@@ -19,7 +20,6 @@ ca-certificates \
 libc-bin \
 net-tools \
 traceroute \
-mtr-tiny \ 
 netcat \
 dnsutils \
 tcpdump \
@@ -30,8 +30,8 @@ dos2unix \
 python3 python3-pip \
 atop \
 p7zip \
-iperf \ 
-findutils \ 
+iperf \
+findutils \
 unzip \
 zip \
 bzip2 \
@@ -41,9 +41,10 @@ txt2regex
 
 # openjdk-9-jre-headless \ ca-certificates-java \ 
 # wireshark
-# -the dcos cli?-
+# -the k8s cli?
 
 RUN pip3 install --upgrade pip
 RUN pip3 install virtualenv
+
 RUN apt-get clean
 
