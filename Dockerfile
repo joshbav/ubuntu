@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu:20.04
 LABEL maintainer="joshb@mesosphere.com" purpose="Josh's lab ubuntu image"
 WORKDIR /
 ENV TERM xterm
