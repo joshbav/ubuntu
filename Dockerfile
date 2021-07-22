@@ -4,7 +4,7 @@ WORKDIR /
 ENV TERM xterm
 # next line is not yet verified
 ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64	
-ENTRYPOINT bash 
+ENTRYPOINT bash
 
 RUN apt-get update
 RUN apt-get -y upgrade
@@ -22,11 +22,9 @@ net-tools \
 traceroute \
 netcat \
 dnsutils \
-tcpdump \
 ftp \
 openssh-client \
 nmap python3-nmap \
-dos2unix \
 python3 python3-pip \
 atop \
 p7zip \
@@ -37,9 +35,11 @@ zip \
 bzip2 \
 txt2regex
 
+
+# omitted: tcpdump dos2unix 
 # mtr-tiny is an enhanced traceroute, use 'mtr' to launch 
 
-# openjdk-9-jre-headless \ ca-certificates-java \ 
+# openjdk-11-jre-headless \ ca-certificates-java \ 
 # wireshark
 # -the k8s cli?
 
