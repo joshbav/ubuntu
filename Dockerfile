@@ -7,6 +7,8 @@ WORKDIR /
 
 COPY .vimrc /etc/vim/vimrc
 
+RUN alias ls='ls -ltrGFha --color=auto'
+
 ENV TERM xterm
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -14,9 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN echo;echo
 RUN echo "Running base apt update and installs"
 RUN apt-get update
-RUN apt-get install -y apt-utils
-RUN apt-get upgrade -y
-RUN apt-get install -y ca-certificates locales
+RUN apt-get install -y apt-utils ca-certificates locales
 RUN echo;echo
 
 #### LOCALE - Sometimes my images are used in other countries
@@ -27,6 +27,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
+RUN update-locale en_US.UTF-8
 # Timezone
 ENV TZ America/Los_Angeles
 RUN rm -f /etc/localtime
@@ -35,10 +36,9 @@ RUN echo;echo
 #### END LANGUAGE
 
 #### UNMINIMIZE, for man command, etc. Takes about 10MB
+# yes is already installed in ubuntu
 RUN "yes | unminimize"
 #### END UNMINIMIZE
-
-RUN alias ls='ls -ltrGFha --color=auto'
 
 #### JOSH'S BASE UTILITIES
 RUN echo "Running base utilities install"
