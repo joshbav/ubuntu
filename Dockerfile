@@ -25,7 +25,7 @@ RUN echo;echo
 #### END LANGUAGE
 
 #### JOSH'S BASE UTILITIES
-ECHO "Running base utilities install"
+RUN echo "Running base utilities install"
 RUN apt-get install -y \
 atop \
 bzip2 \
