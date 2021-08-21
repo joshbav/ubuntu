@@ -7,7 +7,8 @@ WORKDIR /
 
 COPY .vimrc /etc/vim/vimrc
 
-RUN ["sh", "-c", "alias ls='ls -ltrGFha --color=auto'"]
+RUN cp /etc/bash.bashrc /root/.bashrc
+RUN echo "alias ls='ls -ltrGFha --color=auto'" >> /root/.bashrc
 
 ENV TERM xterm
 ENV DEBIAN_FRONTEND=noninteractive
