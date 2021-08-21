@@ -21,6 +21,10 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
+# Timezone
+ENV TZ America/Los_Angeles
+RUN rm -f /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN echo;echo
 #### END LANGUAGE
 
@@ -28,27 +32,35 @@ RUN echo;echo
 RUN echo "Running base utilities install"
 RUN apt-get install -y \
 atop \
+bash-completion \
 bzip2 \
 coreutils \
 curl \
 dnsutils \
+expect \
 findutils \
 ftp \
+git \
 iperf \
 iputils-ping \
 jq \
 less \
 libc-bin \
+man-db \
 nano \
 net-tools \
 netcat \
+nfs-common \
 nmap \
 openssh-client \
 p7zip \
+rsync \
+tcptraceroute \
 traceroute \
 txt2regex \
 unzip \
 vim \
+wget \
 zip
 
 RUN echo;echo
@@ -97,3 +109,6 @@ RUN echo;echo
 RUN apt-get clean
 
 ENTRYPOINT bash
+
+RUN echo "This container image was built on" > /docker_build.txt
+RUN echo $(date) >> /docker_build.txt
