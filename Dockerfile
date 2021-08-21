@@ -93,17 +93,20 @@ RUN yes|unminimize
 
 #### PYTHON 3.9 - AS OF 8-2021
 #RUN RUN echo "Installing Python 3"
-#RUN apt-get install -y python3.9 python3.9-venv
-#RUN apt-get install -y python3-pip
+#RUN apt-get remove -y python3
+#RUN apt-get autoremove -y
+#RUN apt-get install -y python3.9 python3.9-venv python3.9-doc binutils python3-pip binutils-doc cpp-doc gcc-9-locales gcc-9-doc
+#### LIKELY UNNECESSARY# RUN apt-get install -y build-essential
 #RUN python3 -m pip install --upgrade pip
-#RUN python3 -m pip install mypy
 #RUN # don't do with ubuntu # pip3 install --upgrade pip
+#RUN pip install mypy scipy numpy pandas requests 
 #RUN echo;echo
 #### END PYTHON 3
 
 #### JAVA
 #RUN echo "Installing Java 11"
-#RUN apt-get install -y openjdk-11-jre-headless ca-certificates-java
+# JVM ONLY: openjdk-11-jre-headless
+#RUN apt-get install -y openjdk-11-jdk-headless ca-certificates-java
 #RUN java -version
 #ENV JAVA_HOME /usr/bin
 ##ENV JAVA_VERSION 11.0.5
