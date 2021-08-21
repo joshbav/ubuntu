@@ -1,5 +1,11 @@
+# This is not intended to be a small container image.
+# It's used to develop a working image, then a new Dockerfile is made
+# with just what's needed.
+
 FROM ubuntu:20.04
 WORKDIR /
+
+COPY .vimrc /etc/vim/vimrc
 
 ENV TERM xterm
 ENV DEBIAN_FRONTEND=noninteractive
@@ -27,6 +33,12 @@ RUN rm -f /etc/localtime
 RUN ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN echo;echo
 #### END LANGUAGE
+
+#### UNMINIMIZE, for man command, etc. Takes about 10MB
+RUN "yes | unminimize"
+#### END UNMINIMIZE
+
+RUN alias ls='ls -ltrGFha --color=auto'
 
 #### JOSH'S BASE UTILITIES
 RUN echo "Running base utilities install"
@@ -74,24 +86,24 @@ RUN echo;echo
 #RUN echo "Installing kubectl"
 # Per: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 #curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
 #echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
-
 #apt-get install -y kubectl
 #kubectl version --short
 #RUN echo;echo
 #### END KUBERNETES CLI
 
 #### PYTHON 3 - AS OF 8-2021
-#RUN RUN echo "Installing Python"
+#RUN RUN echo "Installing Python 3"
 #RUN apt-get install -y python3.9 python3.9-venv
-#RUN apt-get install -y pythgon3-pip
+#RUN apt-get install -y python3-pip
+#RUN python3 -m pip install --upgrade pip
+#RUN python3 -m pip install mypy
 #RUN # don't do with ubuntu # pip3 install --upgrade pip
 #RUN echo;echo
 #### END PYTHON 3
 
 #### JAVA
-#RUN echo "Installing Python
+#RUN echo "Installing Java 11"
 #RUN apt-get install -y openjdk-11-jre-headless ca-certificates-java
 #RUN java -version
 #ENV JAVA_HOME /usr/bin
@@ -100,8 +112,9 @@ RUN echo;echo
 #### END JAVA
 
 #### GO
-#RUN echo "Installing go"
+#RUN echo "Installing latest golang"
 #RUN apt-get install -y golang
+#### LIKELY UNNECESSARY# RUN apt-get install -y build-essential
 #RUN go version
 RUN echo;echo
 #### END GO
@@ -110,5 +123,5 @@ RUN apt-get clean
 
 ENTRYPOINT bash
 
-RUN echo "This container image was built on" > /docker_build.txt
+RUN echo "This container image was built on:" > /docker_build.txt
 RUN echo $(date) >> /docker_build.txt
