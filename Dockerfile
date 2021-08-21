@@ -7,7 +7,7 @@ WORKDIR /
 
 COPY .vimrc /etc/vim/vimrc
 
-RUN alias ls='ls -ltrGFha --color=auto'
+RUN "alias ls='ls -ltrGFha --color=auto'"
 
 ENV TERM xterm
 ENV DEBIAN_FRONTEND=noninteractive
