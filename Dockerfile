@@ -7,7 +7,7 @@ ENV TERM xterm
 # Default to UTF-8 file.encoding
 ENV LANG en_US.UTF-8
 # Needed by Python 3 for some reason
-ENV LANG C.UTF-8
+#ENV LANG C.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 #### END LANGUAGE
@@ -32,6 +32,7 @@ iputils-ping \
 jq \
 less \
 libc-bin \
+locales \
 nano \
 net-tools \
 netcat \
