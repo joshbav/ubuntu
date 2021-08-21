@@ -35,11 +35,6 @@ RUN ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 RUN echo;echo
 #### END LANGUAGE
 
-#### UNMINIMIZE, for man command, etc. Takes about 10MB
-# yes is already installed in ubuntu
-RUN "yes | unminimize"
-#### END UNMINIMIZE
-
 #### JOSH'S BASE UTILITIES
 RUN echo "Running base utilities install"
 RUN apt-get install -y \
@@ -77,10 +72,14 @@ zip
 
 RUN echo;echo
 #### END JOSH'S BASE UTILITIES
-
 # omitted: tcpdump dos2unix
 # mtr-tiny is an enhanced traceroute, use 'mtr' to launch 
 # wireshark
+
+#### UNMINIMIZE, for man command, etc. Takes about 10MB
+# yes is already installed in ubuntu
+RUN yes|unminimize
+#### END UNMINIMIZE
 
 #### KUBERNETES CLI
 #RUN echo "Installing kubectl"
