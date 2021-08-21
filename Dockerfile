@@ -2,35 +2,30 @@ FROM ubuntu:20.04
 WORKDIR /
 
 ENV TERM xterm
-
-#### LANGUAGE
-# Default to UTF-8 file.encoding
-ENV LANG en_US.UTF-8
-# Needed by Python 3 for some reason
-#ENV LANG C.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-#### END LANGUAGE
-
-
-###ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64
-
 ENV DEBIAN_FRONTEND=noninteractive
 
+#### BASE APT UPDATE AND INSTALLS
+RUN echo;echo
+RUN echo "Running base apt update and installs"
 RUN apt-get update
+RUN apt-get install -y apt-utils
 RUN apt-get upgrade -y
-RUN apt-get install -y apt-utils ca-certificates locales
+RUN apt-get install -y ca-certificates locales
+RUN echo;echo
 
 #### LOCALE - Sometimes my images are used in other countries
 # RUN apt-get install -y language-pack-??
 # Note as of 8-21 LANG=C breaks python3
+RUN echo "Running locale install and configure"
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
+RUN echo;echo
 #### END LANGUAGE
 
 #### JOSH'S BASE UTILITIES
+ECHO "Running base utilities install"
 RUN apt-get install -y \
 atop \
 bzip2 \
@@ -44,7 +39,6 @@ iputils-ping \
 jq \
 less \
 libc-bin \
-locales \
 nano \
 net-tools \
 netcat \
@@ -57,6 +51,7 @@ unzip \
 vim \
 zip
 
+RUN echo;echo
 #### END JOSH'S BASE UTILITIES
 
 # omitted: tcpdump dos2unix
@@ -71,12 +66,14 @@ zip
 
 #apt-get install -y kubectl
 #kubectl version --short
+#RUN echo;echo
 #### END KUBERNETES CLI
 
 #### PYTHON 3 - AS OF 8-2021
 #RUN apt-get install -y python3.9 python3.9-venv
 #RUN apt-get install -y pythgon3-pip
 #RUN # don't do with ubuntu # pip3 install --upgrade pip
+#RUN echo;echo
 #### END PYTHON 3
 
 #### JAVA
@@ -84,12 +81,15 @@ zip
 #RUN java -version
 #ENV JAVA_HOME /usr/bin
 ##ENV JAVA_VERSION 11.0.5
+#RUN echo;echo
 #### END JAVA
 
 #### GO
 #RUN apt-get install -y golang
 #RUN go version
-#### END GO 
+RUN echo;echo
+#### END GO
+
 RUN apt-get clean
 
 ENTRYPOINT bash
