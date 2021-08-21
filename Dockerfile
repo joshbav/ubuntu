@@ -59,6 +59,7 @@ RUN echo;echo
 # wireshark
 
 #### KUBERNETES CLI
+#RUN echo "Installing kubectl"
 # Per: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
 #curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
@@ -70,6 +71,7 @@ RUN echo;echo
 #### END KUBERNETES CLI
 
 #### PYTHON 3 - AS OF 8-2021
+#RUN RUN echo "Installing Python"
 #RUN apt-get install -y python3.9 python3.9-venv
 #RUN apt-get install -y pythgon3-pip
 #RUN # don't do with ubuntu # pip3 install --upgrade pip
@@ -77,6 +79,7 @@ RUN echo;echo
 #### END PYTHON 3
 
 #### JAVA
+#RUN echo "Installing Python
 #RUN apt-get install -y openjdk-11-jre-headless ca-certificates-java
 #RUN java -version
 #ENV JAVA_HOME /usr/bin
@@ -85,6 +88,7 @@ RUN echo;echo
 #### END JAVA
 
 #### GO
+#RUN echo "Installing go"
 #RUN apt-get install -y golang
 #RUN go version
 RUN echo;echo
