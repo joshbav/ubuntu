@@ -91,7 +91,7 @@ RUN yes|unminimize
 #RUN echo;echo
 #### END KUBERNETES CLI
 
-#### PYTHON 3 - AS OF 8-2021
+#### PYTHON 3.9 - AS OF 8-2021
 #RUN RUN echo "Installing Python 3"
 #RUN apt-get install -y python3.9 python3.9-venv
 #RUN apt-get install -y python3-pip
