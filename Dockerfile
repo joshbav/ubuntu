@@ -66,13 +66,12 @@ tcptraceroute \
 traceroute \
 txt2regex \
 unzip \
-vim \
 wget \
 zip
 
 RUN echo;echo
 #### END JOSH'S BASE UTILITIES
-# omitted: tcpdump dos2unix
+# omitted: vim tcpdump dos2unix
 # mtr-tiny is an enhanced traceroute, use 'mtr' to launch 
 # wireshark
 
