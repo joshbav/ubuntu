@@ -45,6 +45,10 @@ unzip \
 vim \
 zip
 
+# Sometimes my images are used in other countries
+RUN locale-gen en_US.UTF-8
+
+
 # omitted: tcpdump dos2unix
 # mtr-tiny is an enhanced traceroute, use 'mtr' to launch 
 # wireshark
